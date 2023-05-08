@@ -1,7 +1,33 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>FareHarbor Calendar Embed</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <div id="fareharbor-calendar">
+        <!-- FareHarbor calendar -->
+        <script id="fh-script" src="https://fareharbor.com/embeds/script/calendar/sailingsouthhaven/?fallback=simple&full-items=yes"></script>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Wait for the FareHarbor script to finish loading
+            $('#fh-script').on('load', function() {
+                // Find all the booking buttons and add a click event listener to them
+                $('#fareharbor-calendar button').on('click', function() {
+                    // Get the URL of the booking page
+                    var bookingUrl = $(this).attr('data-booking-link');
+                    // Open the booking page in a Fancybox lightbox
+                    $.fancybox.open({
+                        src: bookingUrl,
+                        type: 'iframe'
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
